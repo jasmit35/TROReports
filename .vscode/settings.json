@@ -1,0 +1,5 @@
+{
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "python.pythonPath": "/Users/jeff/.pyenv/versions/3.8.12/envs/trorpts",
+}

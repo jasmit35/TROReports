@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Debug trorpts",
+            "type": "python",
+            "request": "launch",
+            "python": "/Users/jeff/.pyenv/shims/python",
+            "program": "src/main.py",
+            "args": [ "-e", "devl", "-r", "trans", "-f", "2021-01-01", "-l", "2021-01-15" ],
+            "console": "integratedTerminal"
+        }
+    ]
+}

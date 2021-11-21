@@ -1,0 +1,8 @@
+config
+openpyxl
+# openpyxl.styles.borders
+# openpyxl.styles
+openpyxl.utils
+python-dotenv
+psycopg2
+
