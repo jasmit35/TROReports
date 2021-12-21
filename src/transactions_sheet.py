@@ -11,10 +11,10 @@ sys.path.insert(1, p)
 import exclsheet as exl
 
 
-def build_worksheet(log, transactions, home_dir, start_date, end_date):
-    log.debug(f"begin build_worksheet({home_dir=}, {start_date=}, {end_date=})")
+def build_worksheet(this_app, transactions, home_dir, start_date, end_date):
+    this_app.debug(f"begin build_worksheet({home_dir=}, {start_date=}, {end_date=})")
 
-    this_sheet = exl.Excel_Sheet()
+    this_sheet = exl.ExcelSheet()
     set_headers(this_sheet)
 
     previous_account = None
@@ -57,7 +57,7 @@ def build_worksheet(log, transactions, home_dir, start_date, end_date):
     file_path = f"{home_dir}/local/rpt/transactions_{start_date}_{end_date}.xlsx"
     this_sheet.save(file_path)
 
-    log.debug("end   build_worksheet - returns None")
+    this_app.debug("end   build_worksheet - returns None")
 
 
 def set_headers(this_sheet):

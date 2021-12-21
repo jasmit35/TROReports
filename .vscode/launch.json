@@ -6,7 +6,7 @@
             "type": "python",
             "request": "launch",
             "python": "/Users/jeff/.pyenv/shims/python",
-            "program": "src/main.py",
+            "program": "src/trorpts.py",
             "args": [ "-e", "devl", "-r", "trans", "-f", "2021-01-01", "-l", "2021-01-15" ],
             "console": "integratedTerminal"
         }
