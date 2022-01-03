@@ -1,5 +1,8 @@
 .git/
 **/*.env
-**/*.pyc
+**/*.err
 **/*.log
+**/*.out
+**/*.pyc
+**/*.rpt
 **/.DS_Store

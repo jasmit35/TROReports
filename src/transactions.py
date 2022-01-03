@@ -68,6 +68,22 @@ class TransactionsTable:
             cursor.execute(sql, (start_date, end_date))
             return cursor.fetchall()
 
+    def select_date_range_summary(self, start_date, end_date):
+        sql = """
+            SELECT account_name,
+                category_name,
+                sum(amount)
+            FROM tro.accounts, tro.categories, tro.transactions
+            WHERE account_id = account_fk
+            AND category_id = category_fk
+            AND transaction_date BETWEEN %s and %s
+            GROUP BY account_name, category_name
+            ORDER BY 1, 2, 3;
+        """
+        with self.db_conn.cursor() as cursor:
+            cursor.execute(sql, (start_date, end_date))
+            return cursor.fetchall()
+
     def mark_tranactions_obsolete(self, start_date, end_date):
         todays_date = datetime.date.today()
         sql = """

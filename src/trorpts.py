@@ -2,8 +2,8 @@
 trorpts.py
 '''
 from argparse import ArgumentParser
-import os
-import sys
+from os import path as ospath
+from sys import path as syspath
 from traceback import print_exc
 
 
@@ -12,16 +12,16 @@ from categories_sheet import CategoriesSheet
 from transactions import TransactionsTable
 import transactions_sheet as ts
 
-shared_code_path = os.path.abspath("../local/python")
-sys.path.insert(1, shared_code_path)
+shared_code_path = ospath.abspath("../local/python")
+syspath.insert(1, shared_code_path)
 from base_app import BaseApp
 from std_dbconn import get_database_connection
 
 
 class TrorptsApp(BaseApp):
 
-    def __init__(self):
-        super().__init__('trorpts', __version__)
+    def __init__(self, app_name, version):
+        super().__init__(app_name, version)
         self.db_conn = get_database_connection(self.environment)
 
     def set_cmdline_params(self):
@@ -61,13 +61,13 @@ class TrorptsApp(BaseApp):
         return 0
 
     def destruct(self, rc):
-        super().destruct(rc)
         self.db_conn = None
+        super().destruct(rc)
 
 
 if __name__ == "__main__":
     try:
-        this_app = TrorptsApp()
+        this_app = TrorptsApp('trorpts', __version__)
         rc = this_app.process()
         this_app.destruct(rc)
     except Exception as e:
