@@ -1,6 +1,6 @@
-'''
+"""
 trorpts.py
-'''
+"""
 from argparse import ArgumentParser
 from os import path as ospath
 from sys import path as syspath
@@ -19,7 +19,6 @@ from std_dbconn import get_database_connection
 
 
 class TrorptsApp(BaseApp):
-
     def __init__(self, app_name, version):
         super().__init__(app_name, version)
         self.db_conn = get_database_connection(self.environment)
@@ -27,9 +26,14 @@ class TrorptsApp(BaseApp):
     def set_cmdline_params(self):
         parser = ArgumentParser(description="TRORpts")
         parser.add_argument(
-            "-e", "--environment", required=True, help="Environment - devl, test or prod"
+            "-e",
+            "--environment",
+            required=True,
+            help="Environment - devl, test or prod",
         )
-        parser.add_argument("-r", "--report", required=True, help="iReport - trans or cats")
+        parser.add_argument(
+            "-r", "--report", required=True, help="iReport - trans or cats"
+        )
         parser.add_argument(
             "-c",
             "--cfgfile",
@@ -43,11 +47,11 @@ class TrorptsApp(BaseApp):
         return vars(args)
 
     def process(self):
-        report = self.cmdline_params.get('report')
-        first_date = self.cmdline_params.get('first_date')
-        last_date = self.cmdline_params.get('last_date')
-        home_dir = self.cfgfile_params.get('home_dir')
-        if report == 'trans':
+        report = self.cmdline_params.get("report")
+        first_date = self.cmdline_params.get("first_date")
+        last_date = self.cmdline_params.get("last_date")
+        home_dir = self.cfgfile_params.get("home_dir")
+        if report == "trans":
             tt = TransactionsTable(self.db_conn)
             transactions = tt.select_date_range(first_date, last_date)
             ts.build_worksheet(self, transactions, home_dir, first_date, last_date)
@@ -67,7 +71,7 @@ class TrorptsApp(BaseApp):
 
 if __name__ == "__main__":
     try:
-        this_app = TrorptsApp('trorpts', __version__)
+        this_app = TrorptsApp("trorpts", __version__)
         rc = this_app.process()
         this_app.destruct(rc)
     except Exception as e:
