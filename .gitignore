@@ -5,4 +5,5 @@
 **/*.out
 **/*.pyc
 **/*.rpt
+**/*.xlsx
 **/.DS_Store

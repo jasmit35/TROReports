@@ -6,16 +6,18 @@ from os import path as ospath
 from sys import path as syspath
 from traceback import print_exc
 
-
 from __init__ import __version__
 from categories_sheet import CategoriesSheet
-from transactions import TransactionsTable
 import transactions_sheet as ts
 
 shared_code_path = ospath.abspath("../local/python")
 syspath.insert(1, shared_code_path)
 from base_app import BaseApp
 from std_dbconn import get_database_connection
+
+shared_code_path = ospath.abspath("../tro/local/python")
+syspath.insert(1, shared_code_path)
+from transactions import TransactionsTable
 
 
 class TrorptsApp(BaseApp):
