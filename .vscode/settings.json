@@ -1,10 +1,10 @@
 {
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
-    "python.pythonPath": "/Users/jeff/.pyenv/versions/3.8.12/envs/trorpts",
+    "python.pythonPath": "/Users/jeff/.pyenv/versions/trorpts/bin",
     "python.analysis.extraPaths": [
-        "/Users/jeff/devl/trorpts/src",
         "/Users/jeff/devl/local/python",
+        "/Users/jeff/devl/tro/local/python",
         "/Users/jeff/.pyenv/versions/trorpts/lib/python3.8/site-packages",
         ],
 }

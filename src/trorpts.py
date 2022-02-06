@@ -8,7 +8,8 @@ from traceback import print_exc
 
 from __init__ import __version__
 from categories_sheet import CategoriesSheet
-import transactions_sheet as ts
+from ending_balances_sheet import EndingBalancesSheet
+from transactions_sheet import TransactionsSheet
 
 shared_code_path = ospath.abspath("../local/python")
 syspath.insert(1, shared_code_path)
@@ -34,7 +35,7 @@ class TrorptsApp(BaseApp):
             help="Environment - devl, test or prod",
         )
         parser.add_argument(
-            "-r", "--report", required=True, help="iReport - trans or cats"
+            "-r", "--report", required=True, help="Report - [cats, ending, trans]"
         )
         parser.add_argument(
             "-c",
@@ -49,20 +50,32 @@ class TrorptsApp(BaseApp):
         return vars(args)
 
     def process(self):
+        valid_reports = ['cats', 'ending', 'trans']
         report = self.cmdline_params.get("report")
+        if report not in valid_reports:
+            self.error('Errror! Report command line option was invalid.')
+            self.output('Errror! Report command line option was invalid.')
+            return 16
+
         first_date = self.cmdline_params.get("first_date")
         last_date = self.cmdline_params.get("last_date")
         home_dir = self.cfgfile_params.get("home_dir")
-        if report == "trans":
-            tt = TransactionsTable(self.db_conn)
-            transactions = tt.select_date_range(first_date, last_date)
-            ts.build_worksheet(self, transactions, home_dir, first_date, last_date)
+        tt = TransactionsTable(self.db_conn)
 
         if report == "cats":
-            tt = TransactionsTable(self.db_conn)
             transactions = tt.select_date_range_summary(first_date, last_date)
             cs = CategoriesSheet()
             cs.build_worksheet(transactions, home_dir, first_date, last_date)
+
+        if report == "ending":
+            balances = tt.select_ending_balances(last_date)
+            ebs = EndingBalancesSheet()
+            ebs.build_worksheet(balances, last_date)
+
+        if report == "trans":
+            transactions = tt.select_date_range(first_date, last_date)
+            ts = TransactionsSheet()
+            ts.build_worksheet(self, transactions, home_dir, first_date, last_date)
 
         return 0
 
