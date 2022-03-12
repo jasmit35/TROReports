@@ -10,7 +10,6 @@ from exclsheet import ExcelSheet
 
 
 class EndingBalancesSheet(ExcelSheet):
-
     def build_worksheet(self, rows, end_date):
         headers = (f"As of {end_date}", "")
         self.row = 1

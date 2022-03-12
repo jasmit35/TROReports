@@ -50,11 +50,11 @@ class TrorptsApp(BaseApp):
         return vars(args)
 
     def process(self):
-        valid_reports = ['cats', 'ending', 'trans']
+        valid_reports = ["cats", "ending", "trans"]
         report = self.cmdline_params.get("report")
         if report not in valid_reports:
-            self.error('Errror! Report command line option was invalid.')
-            self.output('Errror! Report command line option was invalid.')
+            self.error("Errror! Report command line option was invalid.")
+            self.output("Errror! Report command line option was invalid.")
             return 16
 
         first_date = self.cmdline_params.get("first_date")

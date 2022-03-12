@@ -12,7 +12,6 @@ from exclsheet import ExcelSheet
 
 
 class TransactionsSheet(ExcelSheet):
-
     def build_worksheet(self, transactions, home_dir, start_date, end_date):
         self.debug(f"begin build_worksheet({home_dir=}, {start_date=}, {end_date=})")
 
