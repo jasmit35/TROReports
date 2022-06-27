@@ -35,32 +35,8 @@ auto-update -e test -a TROReports
 The secrets files are not stored on GitHub because they contain user names and passwords. You need to manually copy the files:
 
 ```
-cd /Users/jeff/test/TROLoad/local/etc
-cp /Users/jeff/devl/TROLoad/local/etc/.db_secrets.env .
+cd /Users/jeff/test/TROReports/local/etc
+cp /Users/jeff/devl/TROReports/local/etc/.db_secrets.env .
+```
 
-
-
-## Steps to upgrade Test and Prod environments to a new version.
-
-### Hide the existing version:
-
-`cd ~/test/trorpts`
-
-`mkdir .old`
-
-`mv * .old`
-
-
-### Use the standard auto-update to download and install the latest version from github:
-
-`export ENVIRONMENT=devl`
-
-`. ~/.bash_profile`
-
-`auto-update -e test -a troload`
-
-### Set the password for the database user:
-
-The password for the database user (tro_rw) is stored in a file that is NOT saved to github. You must recreate it. troload/local/etc/.db_secrets.env.
-
-
+# Requirements.txt
