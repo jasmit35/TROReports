@@ -12,9 +12,13 @@ from exclsheet import ExcelSheet
 
 
 class TransactionsSheet(ExcelSheet):
-    def build_worksheet(self, transactions, home_dir, start_date, end_date):
-        self.debug(f"begin build_worksheet({home_dir=}, {start_date=}, {end_date=})")
+    def __init__(self, app_name="app name", version="0.0.0"):
+        ExcelSheet.__init__(self)
+        self.app_name = app_name
+        self.version = version
 
+    def build_worksheet(self, transactions, home_dir, start_date, end_date):
+        # self.debug(f"begin build_worksheet({home_dir=}, {start_date=}, {end_date=})")
         self.set_headers()
 
         previous_account = None
@@ -25,7 +29,7 @@ class TransactionsSheet(ExcelSheet):
             account_name = this_transaction[0]
             if account_name != previous_account:
                 if self.row != 3:
-                    add_summary_row(self, sum_start, self.row - 1)
+                    self.add_summary_row(sum_start, self.row - 1)
                     sum_start = self.row
             previous_account = account_name
 
@@ -49,45 +53,42 @@ class TransactionsSheet(ExcelSheet):
                     amount,
                 ],
             )
-            format_row(self)
+            self.format_row()
             self.row += 1
 
-        add_summary_row(self, sum_start, self.row - 1)
+        self.add_summary_row(sum_start, self.row - 1)
 
         file_path = f"{home_dir}/local/rpt/transactions_{start_date}_{end_date}.xlsx"
         self.save(file_path)
 
-        self.debug("end   build_worksheet - returns None")
+        # self.debug("end   build_worksheet - returns None")
 
+    def set_headers(self):
+        headers = (
+            "",
+            "Account",
+            "Date",
+            "Description",
+            "Category",
+            "Cleared",
+            "Number",
+            "Memo",
+            "Tax item",
+            "Amount",
+        )
+        self.row = 2
+        self.set_row_values(headers)
+        self.row += 1
 
-def set_headers(self):
-    headers = (
-        "",
-        "Account",
-        "Date",
-        "Description",
-        "Category",
-        "Cleared",
-        "Number",
-        "Memo",
-        "Tax item",
-        "Amount",
-    )
-    self.row = 2
-    self.set_row_values(headers)
-    self.row += 1
+    def format_row(self):
+        self.col = 3
+        self.format_cell_date()
+        self.col = 10
+        self.format_cell_numeric()
 
-
-def format_row(self):
-    self.col = 3
-    self.format_cell_date()
-    self.col = 10
-    self.format_cell_numeric()
-
-
-def add_summary_row(self, sum_start, sum_end):
-    self.add_border_row(2, 10)
-    self.col = 10
-    self.add_summary_cell(sum_start, sum_end)
-    self.format_cell_numeric()
-    self.row += 2
+    def add_summary_row(self, sum_start, sum_end):
+        self.add_border_row(2, 10)
+        self.col = 10
+        self.add_summary_cell(sum_start, sum_end)
+        self.format_cell_numeric()
+        self.row += 2

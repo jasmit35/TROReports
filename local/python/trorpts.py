@@ -27,7 +27,7 @@ class TrorptsApp(BaseApp):
         self.db_conn = get_database_connection(self.environment)
 
     def set_cmdline_params(self):
-        parser = ArgumentParser(description="TRORpts")
+        parser = ArgumentParser(description="TROReports")
         parser.add_argument(
             "-e",
             "--environment",
@@ -41,7 +41,7 @@ class TrorptsApp(BaseApp):
             "-c",
             "--cfgfile",
             required=False,
-            default="trorpts.cfg",
+            default="TROReports.cfg",
             help="Name of the configuration file to use",
         )
         parser.add_argument("-f", "--first-date", required=False, help="Start Date")
@@ -74,8 +74,8 @@ class TrorptsApp(BaseApp):
 
         if report == "trans":
             transactions = tt.select_date_range(first_date, last_date)
-            ts = TransactionsSheet()
-            ts.build_worksheet(self, transactions, home_dir, first_date, last_date)
+            ts = TransactionsSheet(self.app_name)
+            ts.build_worksheet(transactions, home_dir, first_date, last_date)
 
         return 0
 
@@ -86,7 +86,7 @@ class TrorptsApp(BaseApp):
 
 if __name__ == "__main__":
     try:
-        this_app = TrorptsApp("trorpts", __version__)
+        this_app = TrorptsApp("TROReports", __version__)
         rc = this_app.process()
         this_app.destruct(rc)
     except Exception as e:
