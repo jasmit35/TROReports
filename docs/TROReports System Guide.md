@@ -40,7 +40,6 @@ cp /Users/jeff/devl/TROReports/local/etc/.db_secrets.env .
 ```
 
 ### Install required packages:
-
 ```
 cd /Users/jeff/test/TROReports
 pip install -r requirements.txt
