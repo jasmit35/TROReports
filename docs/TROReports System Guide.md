@@ -45,7 +45,13 @@ cd /Users/jeff/test/TROReports
 pip install -r requirements.txt
 ```
 
+After the testing is successfully completed, follow the instrustions in the section "Finialize tested version" in the FireStarter user's guide.
+
 ## Deploying a new release to Prod
+
+Follow the directions "" in the FireStarter user's guide to create the new release.
+
+
 **If FireStarter has not been updated to specify a release, stage the desired release in the /tmp directory before running auto_update. Then be sure to select the option to use the existing tar file.**
 
 ```
