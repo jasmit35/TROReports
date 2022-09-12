@@ -8,24 +8,24 @@
 cd /tmp
 git clone https://github.com/jasmit35/TROReports.git --branch release/v1.0.0
 ```
-### Archive the existing version:
+
+### Archive existing version:
 
 ```
 cd ~/test/
 tar -czvf TROReports_2022_06_25.tar.gz TROReports
-```
-
-### Clean up any much older archives and the current version:
-
-```
-cd ~/test/
-ll
-rm TROReports_2021*
+mv TROReports_*.tar.gz ~/test.archive
 rm -rf TROReports
 ```
 
-### Use auto-update to install the new release:
+### Clean up older archives:
+```
+cd ~/test/.archive
+rm TROReports_2021*
+ll
+```
 
+### Use auto-update to install the new release:
 ```
 export ENVIRONMENT=test
 auto-update -e test -a TROReports
